@@ -1,9 +1,18 @@
 from microbit import *
 
-leader_number = 0
-other_microbits = 0
-self_number = 0
+"""
+class microstats():
+    def __init__(self):
+        self.leader_number= 0
+        self.no_other_microbits=0
+        self.self_number=0
 
+
+CLASSES are bugged!
+https://forum.makecode.com/t/type-annotation-cannot-appear-on-a-constructor-declaration/4035
+"""
+
+me = microstats()
 wait_time = 20e3
 current_group = 1
 radio.set_group(current_group)
@@ -15,7 +24,8 @@ def fallingBall():
         led.toggle(i,2)
 
 def on_button_pressed_a():
-    radio.send_number(leader_number)
+    ## only press button a on leader microbit
+    radio.send_number(me.self_number)
 
 def on_button_pressed_b():
     fallingBall()
@@ -23,12 +33,25 @@ def on_button_pressed_b():
     radio.send_number(current_group)
 
 def on_received_number(received):
-    if received == 0:
+    ## responds to button a press
+    ## tells other microbits they are not leader
+    ## others then send 
+    if received == me.leader_number:
         #message from leader
-        self_number = 1
-        radio.send_number(1)
 
-    #if received == 1:
+        basic.show_string("rec."+str(received))
+        me.self_number = 1
+        control.wait_micros(randint(1,1e4)*1e3)
+        basic.show_string("sen.")
+        basic.show_number(me.self_number)
+        radio.send_number(me.self_number)
+
+    elif me.self_number == me.leader_number and received > me.leader_number:
+        me.no_other_microbits = me.no_other_microbits + 1
+        basic.show_string(str(me.no_other_microbits))
+    else:
+        basic.show_string("else"+str(received))
+        basic.show_string("self"+str(me.self_number))
 
 
 def on_received_string(received):

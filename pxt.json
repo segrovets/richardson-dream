@@ -1,5 +1,5 @@
 {
-    "name": "temperature",
+    "name": "micro-mpi",
     "description": "",
     "dependencies": {
         "core": "*",
