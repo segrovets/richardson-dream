@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  microbit_dev:
+    build:
+      context: ./docker
+    tty: true
+    volumes:
+      - ./:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    #command: usr/bin/firefox
