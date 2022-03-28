@@ -8,6 +8,8 @@ LABEL description="This is a custom Docker Image for richardson-dream. Please do
 # Disable prompt durring installation (ENV DEB.. = "noninteractive" may also work)
 ARG DEBIAN_FRONTEND=noninteractive
 
+WORKDIR /workspace
+
 # update Ubuntu Software Repo Docker image gets bloated if you initialise with many commands, better to bundle all setup into one.
 # remove cache to reduce size of custom image
 RUN apt update && \
@@ -17,4 +19,9 @@ RUN apt update && \
         xauth  && \
     apt-get autoremove -y && \ 
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* 
+    rm -rf /var/lib/apt/lists/*
+
+COPY Pipfile Pipfile.lock ${HOME}/
+
+RUN pip install -U pip pipenv && \
+    pipenv install --system --dev --ignore-pipfile
