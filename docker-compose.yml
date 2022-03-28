@@ -6,7 +6,7 @@ services:
       context: ./docker
     tty: true
     volumes:
-      - ./:/workspace
+      - ./workspace:/workspace         #creates dynamic link to local directory (sugoi)
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
     #command: usr/bin/firefox
