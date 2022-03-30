@@ -14,6 +14,7 @@ WORKDIR /workspace
 # remove cache to reduce size of custom image
 # https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-fle-no-such-file-or-directo
 # https://github.com/SumoLogic/sumologictoolbox/issues/11 for source of reason for inclusion of lib below libgl1
+# added packages for generating firmware files
 RUN apt update && \
     apt install -yV firefox \
         python3.8 \
@@ -24,8 +25,13 @@ RUN apt update && \
         libqt5network5 \
         libqt5gui5 \
         libqt5core5a \
-        libxcb-xinerama0 \      
-    xauth  && \
+        libxcb-xinerama0 \     
+        cmake \
+        ninja-build \
+        gcc-arm-none-eabi \
+        srecord \
+        libssl-dev \
+        xauth  && \
     apt-get autoremove -y && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
