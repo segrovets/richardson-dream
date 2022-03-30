@@ -12,11 +12,20 @@ WORKDIR /workspace
 
 # update Ubuntu Software Repo Docker image gets bloated if you initialise with many commands, better to bundle all setup into one.
 # remove cache to reduce size of custom image
+# https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-fle-no-such-file-or-directo
+# https://github.com/SumoLogic/sumologictoolbox/issues/11 for source of reason for inclusion of lib below libgl1
 RUN apt update && \
     apt install -yV firefox \
         python3.8 \
         python3-pip \
-        xauth  && \
+        libgl1 \
+        libqt5dbus5 \
+        libqt5widgets5 \
+        libqt5network5 \
+        libqt5gui5 \
+        libqt5core5a \
+        libxcb-xinerama0 \      
+    xauth  && \
     apt-get autoremove -y && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
