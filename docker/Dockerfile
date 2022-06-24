@@ -15,8 +15,10 @@ WORKDIR /workspace
 # https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-fle-no-such-file-or-directo
 # https://github.com/SumoLogic/sumologictoolbox/issues/11 for source of reason for inclusion of lib below libgl1
 # added packages for generating firmware files
+# https://microbit-micropython.readthedocs.io/en/v1.0.1/devguide/installation.html#microbit-linux
+
 RUN apt update && \
-    apt install -yV firefox \
+    apt install -yV \
         python3.8 \
         python3-pip \
         libgl1 \

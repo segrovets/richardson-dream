@@ -1,6 +1,29 @@
 """Micro:Bit stubs for Visual Studio Code
 
-Joseph Fergusson, 2019"""
+Joseph Fergusson, 2019
+
+Including radio stuff 2022 Igor Segrovets
+"""
+
+class _radio:
+    def on(self):
+        """turns radio on"""
+        a = 0
+
+    def receive(self):
+        """recieve a message, unlike with makecode, there is no number/letter distinction"""
+        
+
+    def send(self, send):
+        """send a message"""
+
+    def receive_full(self):
+        """
+        returns message, RSSI (location measure) and timestamp
+        """
+        message, RSSI, timestamp = 0,0,0
+        return message, RSSI, timestamp
+radio=_radio()
 
 class _display:
     def get_pixel(self,x,y):

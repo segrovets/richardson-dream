@@ -1,0 +1,41 @@
+from microbit import *
+import radio
+"""
+Developed in VSCODE with micro:bit Pyhton extension 
+(author: MAKintact)
+notes: for first time user ::
+commands to microbit are made through ctrl+shift+p menu
+for initialisation run 
+    >microbit-python: flash micropython environment to microbit
+to then load scipt onto device run
+    >microbit-python: flash sketch on microbit
+
+if multiple devices plugged in its okay, just only last connected devices is used.
+"""
+
+current_channel = 0 # dont use channel = 0 for some reason its not v1/v2 scross compatible
+display.clear()
+
+# turn on radio
+radio.on()
+radio.config(
+    length=64,
+    queue=10,
+    channel=current_channel, #integer between 0 and 83 (inclusive)
+    power=6, 
+    address=0x75626974, # default used to filter messges 
+    group=0,
+    data_rate=radio.RATE_2MBIT 
+    )
+
+cpt = 0
+while True:
+    if button_a.was_pressed():
+        radio.send(str(cpt))
+        display.scroll(str(cpt))
+        cpt = cpt + 1
+
+
+    message = radio.receive()
+    if message:
+        display.scroll(message)
