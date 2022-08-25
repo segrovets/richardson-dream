@@ -1,13 +1,23 @@
+#!/usr/bin/env python3
 
+initialized = False
 
-string_like_int = "20"
-string_like_float = "55.234"
+if not initialized:
+    print("not yet initialized")
+    initialized = True
+    print("initialized")
 
-print(int(string_like_int))
-print(float(string_like_float))
+if initialized:
+    print("running initialized thing")
 
-if None:
-    print("none")
+on_network = [0, 1,2,3,4,5,6]
 
-if (1, "yes", "mate"):
-    print("yes mate")
+mb_no = 2
+
+string_list = str(on_network)
+
+def string_to_list(string):
+    #string = string[4:] # remove leading type signifier
+    return [element.strip(",").strip("[").strip("]") for element in string.split()]
+
+print(string_to_list(string_list))
