@@ -20,4 +20,7 @@ def string_to_list(string):
     #string = string[4:] # remove leading type signifier
     return [element.strip(",").strip("[").strip("]") for element in string.split()]
 
-print(string_to_list(string_list))
+#print(string_to_list(string_list))
+
+n = 7 /3
+print(int(n))
